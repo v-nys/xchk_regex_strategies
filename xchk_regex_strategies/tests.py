@@ -1,3 +1,28 @@
 from django.test import TestCase
+from unittest.mock import Mock, patch, MagicMock
+from .strats import RegexCheck
+from xchk.models import SubmissionV2
 
-# Create your tests here.
+class RegexCheckTest(TestCase):
+
+    def setUp(self):
+        self.txt_vs_regex_check = RegexCheck()
+
+    def _model_and_student_mock(self,model,student):
+        base_mock = MagicMock(name='mock for open')
+        mock_context_manager_1 = MagicMock(name='mock for context manager 1')
+        mock_context_manager_1.__enter__.return_value.read.return_value = model
+        mock_context_manager_2 = MagicMock(name='mock for context manager 2')
+        mock_context_manager_2.__enter__.return_value.read.return_value = student
+        base_mock.side_effect=[mock_context_manager_1, mock_context_manager_2]
+        return base_mock
+
+    def test_wrong_language_link(self):
+        # everything but two letters n and l is allowed
+        link = r"""https://git\-scm\.com/book/([^n].+|n[^l].*|nl[^/].+)/v2"""
+        text = r"""https://git-scm.com/book/en/v2"""
+        base_mock = self._model_and_student_mock(link,text)
+        submission = SubmissionV2()
+        with patch('builtins.open',base_mock):
+            outcome = self.txt_vs_regex_check.check_submission(submission,'/tmp/student','/tmp/model',True,1,False)
+            self.assertFalse(outcome[0][0])
