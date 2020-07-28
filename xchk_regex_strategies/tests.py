@@ -18,10 +18,33 @@ class RegexCheckTest(TestCase):
         base_mock.side_effect=[mock_context_manager_1, mock_context_manager_2]
         return base_mock
 
-    def test_wrong_language_link(self):
-        # everything but two letters n and l is allowed
+# TODO: belongs in Git content app
+    def test_non_dutch_language_link(self):
+        # everything but two letters n and l is allowed by this regex
         link = r"""https://git\-scm\.com/book/([^n].+|n[^l].*|nl[^/].+)/v2"""
         text = r"""https://git-scm.com/book/en/v2"""
+        base_mock = self._model_and_student_mock(link,text)
+        submission = SubmissionV2()
+        with patch('builtins.open',base_mock):
+            outcome_analysis = self.txt_vs_regex_check.check_submission(submission,'/tmp/student','/tmp/model',True,1,False)
+            self.assertTrue(outcome_analysis.outcome)
+
+# TODO: belongs in Git content app
+    def test_prohibited_dutch_language_link(self):
+        # everything but two letters n and l is allowed by this regex
+        link = r"""https://git\-scm\.com/book/([^n].+|n[^l].*|nl[^/].+)/v2"""
+        text = r"""https://git-scm.com/book/nl/v2"""
+        base_mock = self._model_and_student_mock(link,text)
+        submission = SubmissionV2()
+        with patch('builtins.open',base_mock):
+            outcome_analysis = self.txt_vs_regex_check.check_submission(submission,'/tmp/student','/tmp/model',True,1,False)
+            self.assertFalse(outcome_analysis.outcome)
+
+# TODO: belongs in Git content app
+    def test_non_link(self):
+        # everything but two letters n and l is allowed by this regex
+        link = r"""https://git\-scm\.com/book/([^n].+|n[^l].*|nl[^/].+)/v2"""
+        text = r"""https://ubuntu.com"""
         base_mock = self._model_and_student_mock(link,text)
         submission = SubmissionV2()
         with patch('builtins.open',base_mock):
