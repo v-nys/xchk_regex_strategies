@@ -13,6 +13,5 @@ def boot_django():
             "xchk_core",
             "xchk_regex_strategies",
         ),
-        AUTH_USER_MODEL="django.contrib.auth.models.User"
     )
     django.setup()
