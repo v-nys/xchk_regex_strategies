@@ -1,5 +1,5 @@
 import regex
-from xchk.strats import CheckingPredicate
+from xchk_core.strats import CheckingPredicate
 
 class RegexCheck(CheckingPredicate):
 

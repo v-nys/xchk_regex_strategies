@@ -1,7 +1,8 @@
-from django.test import TestCase
+import unittest
+from unittest import TestCase
 from unittest.mock import Mock, patch, MagicMock
-from .strats import RegexCheck
-from xchk.models import SubmissionV2
+from xchk_regex_strategies.strats import RegexCheck
+from xchk_core.models import SubmissionV2
 
 class RegexCheckTest(TestCase):
 
@@ -26,3 +27,6 @@ class RegexCheckTest(TestCase):
         with patch('builtins.open',base_mock):
             outcome = self.txt_vs_regex_check.check_submission(submission,'/tmp/student','/tmp/model',True,1,False)
             self.assertFalse(outcome[0][0])
+
+if __name__ == '__main__':
+    unittest.main()
