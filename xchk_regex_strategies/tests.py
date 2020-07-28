@@ -1,5 +1,5 @@
 import unittest
-from unittest import TestCase
+from django.test import TestCase
 from unittest.mock import Mock, patch, MagicMock
 from xchk_regex_strategies.strats import RegexCheck
 from xchk_core.models import SubmissionV2
