@@ -10,6 +10,7 @@ def boot_django():
     settings.configure(
         DEBUG=True,
         INSTALLED_APPS=(
+            "xchk_core",
             "xchk_regex_strategies",
         ),
         AUTH_USER_MODEL="django.contrib.auth.models.User"
