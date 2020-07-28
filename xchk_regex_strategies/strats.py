@@ -1,6 +1,6 @@
 import os
 import regex
-from xchk_core.strats import CheckingPredicate
+from xchk_core.strats import CheckingPredicate, OutcomeAnalysis, OutcomeComponent
 
 class RegexCheck(CheckingPredicate):
 
@@ -63,10 +63,4 @@ class RegexCheck(CheckingPredicate):
                     explanation = f"Je oplossing matcht volledig met een gekend patroon en dat is niet gewenst."
             else:
                 explanation = None
-            return ((overall_outcome,\
-                     [(init_check_number,\
-                       overall_outcome,\
-                       desired_outcome,\
-                       "text" if explanation else None,\
-                       explanation)]),\
-                    init_check_number + 1)
+            return OutcomeAnalysis(outcome=overall_outcome,components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation)],successor_component_number=init_check_number+1)
