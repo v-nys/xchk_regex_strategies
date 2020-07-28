@@ -26,6 +26,7 @@ class RegexCheckTest(TestCase):
         submission = SubmissionV2()
         with patch('builtins.open',base_mock):
             outcome = self.txt_vs_regex_check.check_submission(submission,'/tmp/student','/tmp/model',True,1,False)
+            print(outcome)
             self.assertFalse(outcome[0][0])
 
 if __name__ == '__main__':

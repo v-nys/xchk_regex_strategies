@@ -1,3 +1,4 @@
+import os
 import regex
 from xchk_core.strats import CheckingPredicate
 
@@ -62,7 +63,6 @@ class RegexCheck(CheckingPredicate):
                     explanation = f"Je oplossing matcht volledig met een gekend patroon en dat is niet gewenst."
             else:
                 explanation = None
-            logger.info(f'overall_outcome was {overall_outcome} voor pattern {pattern} en input {fhs_contents}')
             return ((overall_outcome,\
                      [(init_check_number,\
                        overall_outcome,\
