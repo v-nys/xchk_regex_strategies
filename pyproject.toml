@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "xchk_regex_strategies"
+name = "xchk-regex-strategies"
 version = "0.1.0"
 description = "Checking strategies for xchk based around regular expressions."
 authors = ["Vincent Nys <vincentnys@gmail.com>"]
