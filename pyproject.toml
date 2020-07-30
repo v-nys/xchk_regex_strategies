@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-xchk-core = ">=0.1.0"
+xchk-core = {git = "git@github.com:v-nys/xchk_core.git"}
 regex = "^2020.7.14"
 
 [tool.poetry.dev-dependencies]
