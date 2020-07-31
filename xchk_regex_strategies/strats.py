@@ -4,7 +4,8 @@ from xchk_core.strats import CheckingPredicate, OutcomeAnalysis, OutcomeComponen
 
 class RegexCheck(CheckingPredicate):
 
-    def __init__(self,name=None,extension=None,model_name=None):
+    def __init__(self,name=None,extension=None,model_name=None,implicit=False):
+        super().__init__(implicit)
         # for both model solution and student solution by default
         self.name = name
         # may be none
@@ -36,9 +37,13 @@ class RegexCheck(CheckingPredicate):
         return set(self.entry(exercise_name))
 
     def instructions(self,exercise_name,init_check_number):
+        if self.implicit:
+            return ([], init_check_number)
         return ([f'Je bestand met naam {self.entry(exercise_name)} matcht met een gekend patroon'],init_check_number + 1)
 
     def negative_instructions(self,exercise_name,init_check_number):
+        if self.implicit:
+            return ([], init_check_number)
         return ([f'Je bestand met naam {self.entry(exercise_name)} matcht niet met een gekend patroon'],init_check_number + 1)
 
     def check_submission(self,submission,student_path,model_path,desired_outcome,init_check_number,parent_is_negation=False):
