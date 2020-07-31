@@ -8,7 +8,7 @@ package_data = \
 {'': ['*']}
 
 install_requires = \
-['regex>=2020.7.14,<2021.0.0', 'xchk-core>=0.1.6']
+['regex>=2020.7.14,<2021.0.0', 'xchk-core']
 
 setup_kwargs = {
     'name': 'xchk-regex-strategies',
@@ -23,7 +23,7 @@ setup_kwargs = {
     'packages': packages,
     'package_data': package_data,
     'install_requires': install_requires,
-    'dependency_links': ['http://github.com/v-nys/xchk_core/tarball/master#egg=xchk-core-1.0.6'],
+    'dependency_links': ['http://github.com/v-nys/xchk_core/tarball/master#egg=xchk-core'],
     'python_requires': '>=3.7,<4.0',
 }
 
