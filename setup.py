@@ -8,7 +8,7 @@ package_data = \
 {'': ['*']}
 
 install_requires = \
-['regex>=2020.7.14,<2021.0.0', 'xchk-core']
+['regex>=2020.7.14,<2021.0.0']
 
 setup_kwargs = {
     'name': 'xchk-regex-strategies',
