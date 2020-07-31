@@ -1,0 +1,10 @@
+setup.py
+xchk_regex_strategies/__init__.py
+xchk_regex_strategies/apps.py
+xchk_regex_strategies/strats.py
+xchk_regex_strategies/tests.py
+xchk_regex_strategies.egg-info/PKG-INFO
+xchk_regex_strategies.egg-info/SOURCES.txt
+xchk_regex_strategies.egg-info/dependency_links.txt
+xchk_regex_strategies.egg-info/requires.txt
+xchk_regex_strategies.egg-info/top_level.txt

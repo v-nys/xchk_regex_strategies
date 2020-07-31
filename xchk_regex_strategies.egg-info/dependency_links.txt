@@ -1,0 +1,1 @@
+http://github.com/v-nys/xchk_core/tarball/master#egg=xchk-core

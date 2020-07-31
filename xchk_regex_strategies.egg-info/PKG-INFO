@@ -1,0 +1,11 @@
+Metadata-Version: 1.2
+Name: xchk-regex-strategies
+Version: 0.1.2
+Summary: Checking strategies for xchk based around regular expressions.
+Home-page: UNKNOWN
+Author: Vincent Nys
+Author-email: vincentnys@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.7,<4.0
