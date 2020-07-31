@@ -120,25 +120,25 @@ version = "1.6.2"
 
 [[package]]
 category = "main"
-description = ""
+description = "Core functionality for the xchk teaching framework"
 name = "xchk-core"
 optional = false
 python-versions = "^3.7"
 version = "0.1.6"
 
 [package.dependencies]
-django = "^2.2"
-django-enumfield = "^2.0.1"
-graphviz = "^0.14.1"
-pinax-notifications = "^6.0.0"
-python-igraph = "^0.8.2"
+django = ">=2.2,<3.0"
+django-enumfield = ">=2.0.1,<3.0.0"
+graphviz = ">=0.14.1,<0.15.0"
+pinax-notifications = ">=6.0.0,<7.0.0"
+python-igraph = ">=0.8.2,<0.9.0"
 
 [package.source]
-reference = "dc7c5c6ea471ea8512340b15f5e5d6035b014385"
-type = "git"
-url = "git@github.com:v-nys/xchk_core.git"
+reference = ""
+type = "url"
+url = "http://github.com/v-nys/xchk_core/tarball/master"
 [metadata]
-content-hash = "56ed32d12e1e006f3765497f18825d8b352a9fda6900b133db37b04a3304f765"
+content-hash = "44e71e0595c95d9768549261ff9dc4bd1259714f56eec31a605afe373466f7f0"
 lock-version = "1.0"
 python-versions = "^3.7"
 
