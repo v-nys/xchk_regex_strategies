@@ -12,7 +12,7 @@ install_requires = \
 
 setup_kwargs = {
     'name': 'xchk-regex-strategies',
-    'version': '0.1.2',
+    'version': '0.1.3',
     'description': 'Checking strategies for xchk based around regular expressions.',
     'long_description': None,
     'author': 'Vincent Nys',

@@ -36,15 +36,15 @@ class RegexCheck(CheckingPredicate):
     def mentioned_files(self,exercise_name):
         return set(self.entry(exercise_name))
 
-    def instructions(self,exercise_name,init_check_number):
+    def instructions(self,exercise_name):
         if self.implicit:
-            return ([], init_check_number)
-        return ([f'Je bestand met naam {self.entry(exercise_name)} matcht met een gekend patroon'],init_check_number + 1)
+            return []
+        return [f'Je bestand met naam {self.entry(exercise_name)} matcht met een gekend patroon']
 
-    def negative_instructions(self,exercise_name,init_check_number):
+    def negative_instructions(self,exercise_name):
         if self.implicit:
-            return ([], init_check_number)
-        return ([f'Je bestand met naam {self.entry(exercise_name)} matcht niet met een gekend patroon'],init_check_number + 1)
+            return []
+        return [f'Je bestand met naam {self.entry(exercise_name)} matcht niet met een gekend patroon']
 
     def check_submission(self,submission,student_path,model_path,desired_outcome,init_check_number,parent_is_negation=False):
         regex_entry = f"{self.model_entry(submission.content_uid)}.regex"
