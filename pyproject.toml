@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-xchk-core = {url = "http://github.com/v-nys/xchk_core/tarball/master"}
+xchk-core = {url = "http://github.com/v-nys/xchk_core/tarball/develop"}
 regex = "^2020.7.14"
 
 [tool.poetry.dev-dependencies]
