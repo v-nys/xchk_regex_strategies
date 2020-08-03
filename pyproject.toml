@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xchk-regex-strategies"
-version = "0.1.3"
+version = "0.1.4"
 description = "Checking strategies for xchk based around regular expressions."
 authors = ["Vincent Nys <vincentnys@gmail.com>"]
 license = "MIT"
