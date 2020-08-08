@@ -1,5 +1,5 @@
 [[package]]
-category = "main"
+category = "dev"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 name = "django"
 optional = false
@@ -15,7 +15,7 @@ argon2 = ["argon2-cffi (>=16.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "A helper class for handling configuration defaults of packaged apps gracefully."
 name = "django-appconf"
 optional = false
@@ -26,7 +26,7 @@ version = "1.0.4"
 django = "*"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Custom Django field for using enumerations of named constants"
 name = "django-enumfield"
 optional = false
@@ -40,7 +40,7 @@ six = ">=1.10.0"
 dev = ["black", "isort", "django", "mypy", "django-stubs", "djangorestframework-stubs"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Simple Python interface for Graphviz"
 name = "graphviz"
 optional = false
@@ -53,7 +53,7 @@ docs = ["sphinx (>=1.8)", "sphinx-rtd-theme"]
 test = ["mock (>=3)", "pytest (>=4)", "pytest-mock (>=2)", "pytest-cov"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "User notification management for the Django web framework"
 name = "pinax-notifications"
 optional = false
@@ -65,7 +65,7 @@ django = ">=2.2"
 django-appconf = ">=1.0.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "High performance graph data structures and algorithms"
 name = "python-igraph"
 optional = false
@@ -79,7 +79,7 @@ texttable = ">=1.6.2"
 plotting = ["pycairo (>=1.18.0)"]
 
 [[package]]
-category = "main"
+category = "dev"
 description = "World timezone definitions, modern and historical"
 name = "pytz"
 optional = false
@@ -95,7 +95,7 @@ python-versions = "*"
 version = "2020.7.14"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -103,7 +103,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "1.15.0"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Non-validating SQL parser"
 name = "sqlparse"
 optional = false
@@ -111,7 +111,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.3.1"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "module for creating simple ASCII tables"
 name = "texttable"
 optional = false
@@ -119,7 +119,7 @@ python-versions = "*"
 version = "1.6.2"
 
 [[package]]
-category = "main"
+category = "dev"
 description = "Core functionality for the xchk teaching framework"
 name = "xchk-core"
 optional = false
@@ -138,7 +138,7 @@ reference = ""
 type = "url"
 url = "http://github.com/v-nys/xchk_core/tarball/develop"
 [metadata]
-content-hash = "c3d1ff9e6cccdaa640498724d690962d3c1a70a890c89755a64e57b749f91325"
+content-hash = "58fe5ba7cb9c656eb06b8d626a66b6ee6169300cceaf41cd84a4cd99c104ef6c"
 lock-version = "1.0"
 python-versions = "^3.7"
 
