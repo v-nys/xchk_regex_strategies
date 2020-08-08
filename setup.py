@@ -23,7 +23,6 @@ setup_kwargs = {
     'packages': packages,
     'package_data': package_data,
     'install_requires': install_requires,
-    'dependency_links': ['http://github.com/v-nys/xchk_core/tarball/develop#egg=xchk-core'],
     'python_requires': '>=3.7,<4.0',
 }
 
