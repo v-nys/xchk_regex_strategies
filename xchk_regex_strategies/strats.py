@@ -64,4 +64,4 @@ class RegexCheck(CheckingPredicate):
             else:
                 explanation = None
             return OutcomeAnalysis(outcome=overall_outcome,
-                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation)])
+                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation,rendered_data="")])
