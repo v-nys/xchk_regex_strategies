@@ -32,12 +32,12 @@ class RegexCheck(CheckingPredicate):
         return set(self.entry(exercise_name))
 
     def instructions(self,exercise_name):
-        return [f'Je bestand met naam {self.entry(exercise_name)} matcht met {self.pattern_description}']
+        return [f'De inhoud van je bestand met naam {self.entry(exercise_name)} matcht met {self.pattern_description}']
 
     def negative_instructions(self,exercise_name):
-        return [f'Je bestand met naam {self.entry(exercise_name)} matcht niet met {self.pattern_description}']
+        return [f'De inhoud van je bestand met naam {self.entry(exercise_name)} matcht niet met {self.pattern_description}']
 
-    def check_submission(self,submission,student_path,model_path,desired_outcome,init_check_number,parent_is_negation=False,open=open):
+    def check_submission(self,submission,student_path,desired_outcome,init_check_number,parent_is_negation=False,open=open):
         with open(os.path.join(student_path,self.entry(submission.content_uid))) as fhs:
             fhs_contents = fhs.read()
             partial = self._longest_partial_match(fhs_contents,self.pattern)
