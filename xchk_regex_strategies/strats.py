@@ -4,11 +4,10 @@ from xchk_core.strats import CheckingPredicate, OutcomeAnalysis, OutcomeComponen
 
 class RegexCheck(CheckingPredicate):
 
-    def __init__(self,name=None,extension=None,model_name=None):
-        # for both model solution and student solution by default
+    def __init__(self,pattern,pattern_description='een gekend patroon',name=None,extension=None):
         self.name = name
-        # may be none
-        self.model_name = model_name
+        self.pattern = pattern
+        self.pattern_description = pattern_description
         # for student solution only
         self.extension = extension
 
@@ -29,39 +28,32 @@ class RegexCheck(CheckingPredicate):
     def entry(self,exercise_name):
         return f'{self.name or exercise_name}{"." if self.extension else ""}{self.extension or ""}'
 
-    def model_entry(self,exercise_name):
-        return f'{self.model_name or self.name or exercise_name}{"." if self.extension else ""}{self.extension or ""}'
-
     def mentioned_files(self,exercise_name):
         return set(self.entry(exercise_name))
 
     def instructions(self,exercise_name):
-        return [f'Je bestand met naam {self.entry(exercise_name)} matcht met een gekend patroon']
+        return [f'Je bestand met naam {self.entry(exercise_name)} matcht met {self.pattern_description}']
 
     def negative_instructions(self,exercise_name):
-        return [f'Je bestand met naam {self.entry(exercise_name)} matcht niet met een gekend patroon']
+        return [f'Je bestand met naam {self.entry(exercise_name)} matcht niet met {self.pattern_description}']
 
-    def check_submission(self,submission,student_path,model_path,desired_outcome,init_check_number,parent_is_negation=False):
-        regex_entry = f"{self.model_entry(submission.content_uid)}.regex"
-        with open(os.path.join(model_path,regex_entry)) as fhm,\
-             open(os.path.join(student_path,self.entry(submission.content_uid))) as fhs:
-            fhm_contents = fhm.read()
+    def check_submission(self,submission,student_path,model_path,desired_outcome,init_check_number,parent_is_negation=False,open=open):
+        with open(os.path.join(student_path,self.entry(submission.content_uid))) as fhs:
             fhs_contents = fhs.read()
-            pattern = regex.compile(fhm_contents,flags=regex.VERBOSE)
-            partial = self._longest_partial_match(fhs_contents,pattern)
-            if partial != fhs_contents or not pattern.fullmatch(fhs_contents):
+            partial = self._longest_partial_match(fhs_contents,self.pattern)
+            if partial != fhs_contents or not self.pattern.fullmatch(fhs_contents):
                 overall_outcome = False
             else:
                 overall_outcome = True
             if desired_outcome != overall_outcome:
                 if partial != fhs_contents:
                     lines = partial.split('\n')
-                    explanation = f"Je oplossing verschilt van het verwachte patroon vanaf regel {len(lines)}, karakter {len(lines[-1])+1}."
-                elif not pattern.fullmatch(fhs_contents):
-                    explanation = f"Je oplossing is geen (volledige) match met het gekende patroon."
+                    explanation = f"Je oplossing verschilt van {self.pattern_description} vanaf regel {len(lines)}, karakter {len(lines[-1])+1}."
+                elif not self.pattern.fullmatch(fhs_contents):
+                    explanation = f"Je oplossing is geen (volledige) match met {self.pattern_description}."
                 else:
-                    explanation = f"Je oplossing matcht volledig met een gekend patroon en dat is niet gewenst."
+                    explanation = f"Je oplossing matcht volledig met {self.pattern_description} en dat is niet gewenst."
             else:
                 explanation = None
             return OutcomeAnalysis(outcome=overall_outcome,
-                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation,rendered_data="")])
+                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation,rendered_data=f'<p>{explanation}</p>' if explanation else "")])
