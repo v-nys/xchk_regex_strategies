@@ -1,6 +1,6 @@
 import os
 import regex
-from xchk_core.strats import CheckingPredicate, OutcomeAnalysis, OutcomeComponent
+from xchk_core.strats import CheckingPredicate, OutcomeAnalysis, OutcomeComponent, NO_ALTERNATIVES_ADDENDUM
 
 class RegexCheck(CheckingPredicate):
 
@@ -37,7 +37,7 @@ class RegexCheck(CheckingPredicate):
     def negative_instructions(self,exercise_name):
         return [f'De inhoud van je bestand met naam {self.entry(exercise_name)} matcht niet met {self.pattern_description}']
 
-    def check_submission(self,submission,student_path,desired_outcome,init_check_number,parent_is_negation=False,open=open):
+    def check_submission(self,submission,student_path,desired_outcome,init_check_number,ancestor_has_alternatives,parent_is_negation=False,open=open):
         with open(os.path.join(student_path,self.entry(submission.content_uid))) as fhs:
             fhs_contents = fhs.read()
             partial = self._longest_partial_match(fhs_contents,self.pattern)
@@ -56,4 +56,4 @@ class RegexCheck(CheckingPredicate):
             else:
                 explanation = None
             return OutcomeAnalysis(outcome=overall_outcome,
-                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation,rendered_data=f'<p>{explanation}</p>' if explanation else "")])
+                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation,rendered_data=f'<p>{explanation}{NO_ALTERNATIVES_ADDENDUM if overall_outcome != desired_outcome and not ancestor_has_alternatives else ""}</p>' if explanation else "")])
