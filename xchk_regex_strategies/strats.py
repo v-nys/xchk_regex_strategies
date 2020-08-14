@@ -1,6 +1,6 @@
 import os
 import regex
-from xchk_core.strats import CheckingPredicate, OutcomeAnalysis, OutcomeComponent, NO_ALTERNATIVES_ADDENDUM
+from xchk_core.strats import CheckingPredicate, OutcomeAnalysis, OutcomeComponent
 
 class RegexCheck(CheckingPredicate):
 
@@ -56,4 +56,4 @@ class RegexCheck(CheckingPredicate):
             else:
                 explanation = None
             return OutcomeAnalysis(outcome=overall_outcome,
-                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation,rendered_data=f'<p>{explanation}{NO_ALTERNATIVES_ADDENDUM if overall_outcome != desired_outcome and not ancestor_has_alternatives else ""}</p>' if explanation else "")])
+                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,renderer="text" if explanation else None,renderer_data=explanation,rendered_data=f'<p>{explanation}</p>' if explanation else "",acceptable_to_ancestor=overall_outcome == desired_outcome or ancestor_has_alternatives)])

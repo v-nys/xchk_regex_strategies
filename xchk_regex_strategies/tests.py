@@ -19,7 +19,7 @@ class RegexMatchingTest(TestCase):
         mock_open.return_value.__enter__.return_value.read.return_value = 'acdddddddde'
         submission = SubmissionV2(content_uid='some_uid')
         analysis = chk.check_submission(submission=submission,student_path='/student',model_path='/home/model',desired_outcome=True,init_check_number=1,parent_is_negation=False,open=mock_open)
-        expected = OutcomeAnalysis(outcome=True,outcomes_components=[OutcomeComponent(component_number=1,outcome=True,desired_outcome=True,renderer=None,renderer_data=None,rendered_data='')])
+        expected = OutcomeAnalysis(outcome=True,outcomes_components=[OutcomeComponent(component_number=1,outcome=True,desired_outcome=True,renderer=None,renderer_data=None,rendered_data='',acceptable_to_ancestor=True)])
         self.assertEquals(analysis,expected)
 
     def test_nonmatching_string_single_line(self):
