@@ -18,7 +18,7 @@ class RegexMatchingTest(TestCase):
         mock_open = MagicMock()
         mock_open.return_value.__enter__.return_value.read.return_value = 'acdddddddde'
         submission = SubmissionV2(content_uid='some_uid')
-        analysis = chk.check_submission(submission=submission,student_path='/student',model_path='/home/model',desired_outcome=True,init_check_number=1,parent_is_negation=False,open=mock_open)
+        analysis = chk.check_submission(submission=submission,student_path='/student',desired_outcome=True,init_check_number=1,ancestor_has_alternatives=False,parent_is_negation=False,open=mock_open)
         expected = OutcomeAnalysis(outcome=True,outcomes_components=[OutcomeComponent(component_number=1,outcome=True,desired_outcome=True,rendered_data='',acceptable_to_ancestor=True)])
         self.assertEquals(analysis,expected)
 
@@ -27,8 +27,8 @@ class RegexMatchingTest(TestCase):
         mock_open = MagicMock()
         mock_open.return_value.__enter__.return_value.read.return_value = 'acddddddddf'
         submission = SubmissionV2(content_uid='some_uid')
-        analysis = chk.check_submission(submission=submission,student_path='/student',model_path='/home/model',desired_outcome=True,init_check_number=1,parent_is_negation=False,open=mock_open)
-        expected = OutcomeAnalysis(outcome=False,outcomes_components=[OutcomeComponent(component_number=1,outcome=False,desired_outcome=True,rendered_data='<p>Je oplossing verschilt van een gekend patroon vanaf regel 1, karakter 11.</p>')])
+        analysis = chk.check_submission(submission=submission,student_path='/student',desired_outcome=True,init_check_number=1,ancestor_has_alternatives=False,parent_is_negation=False,open=mock_open)
+        expected = OutcomeAnalysis(outcome=False,outcomes_components=[OutcomeComponent(component_number=1,outcome=False,desired_outcome=True,rendered_data='<p>Je oplossing verschilt van een gekend patroon vanaf regel 1, karakter 11.</p>',acceptable_to_ancestor=False)])
         self.assertEquals(analysis,expected)
 
     def test_nonmatching_string_multiple_lines(self):
@@ -36,8 +36,8 @@ class RegexMatchingTest(TestCase):
         mock_open = MagicMock()
         mock_open.return_value.__enter__.return_value.read.return_value = 'acdddddddde\nfgih'
         submission = SubmissionV2(content_uid='some_uid')
-        analysis = chk.check_submission(submission=submission,student_path='/student',model_path='/home/model',desired_outcome=True,init_check_number=1,parent_is_negation=False,open=mock_open)
-        expected = OutcomeAnalysis(outcome=False,outcomes_components=[OutcomeComponent(component_number=1,outcome=False,desired_outcome=True,rendered_data='<p>Je oplossing verschilt van een gekend patroon vanaf regel 2, karakter 3.</p>')])
+        analysis = chk.check_submission(submission=submission,student_path='/student',desired_outcome=True,init_check_number=1,ancestor_has_alternatives=False,parent_is_negation=False,open=mock_open)
+        expected = OutcomeAnalysis(outcome=False,outcomes_components=[OutcomeComponent(component_number=1,outcome=False,desired_outcome=True,rendered_data='<p>Je oplossing verschilt van een gekend patroon vanaf regel 2, karakter 3.</p>',acceptable_to_ancestor=False)])
         self.assertEquals(analysis,expected)
 
 if __name__ == '__main__':

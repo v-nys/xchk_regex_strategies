@@ -148,7 +148,7 @@ pinax-notifications = "^6.0.0"
 python-igraph = "^0.8.2"
 
 [package.source]
-reference = "f2975dd1713843bd7d621132b102954f82510dec"
+reference = "e6b343d6734e56db252e9c79349206be599715ee"
 type = "git"
 url = "git@github.com:v-nys/xchk_core.git"
 [metadata]
