@@ -19,7 +19,7 @@ class RegexMatchingTest(TestCase):
         mock_open.return_value.__enter__.return_value.read.return_value = 'acdddddddde'
         submission = SubmissionV2(content_uid='some_uid')
         analysis = chk.check_submission(submission=submission,student_path='/student',model_path='/home/model',desired_outcome=True,init_check_number=1,parent_is_negation=False,open=mock_open)
-        expected = OutcomeAnalysis(outcome=True,outcomes_components=[OutcomeComponent(component_number=1,outcome=True,desired_outcome=True,renderer=None,renderer_data=None,rendered_data='',acceptable_to_ancestor=True)])
+        expected = OutcomeAnalysis(outcome=True,outcomes_components=[OutcomeComponent(component_number=1,outcome=True,desired_outcome=True,rendered_data='',acceptable_to_ancestor=True)])
         self.assertEquals(analysis,expected)
 
     def test_nonmatching_string_single_line(self):
@@ -28,7 +28,7 @@ class RegexMatchingTest(TestCase):
         mock_open.return_value.__enter__.return_value.read.return_value = 'acddddddddf'
         submission = SubmissionV2(content_uid='some_uid')
         analysis = chk.check_submission(submission=submission,student_path='/student',model_path='/home/model',desired_outcome=True,init_check_number=1,parent_is_negation=False,open=mock_open)
-        expected = OutcomeAnalysis(outcome=False,outcomes_components=[OutcomeComponent(component_number=1,outcome=False,desired_outcome=True,renderer='text',renderer_data='Je oplossing verschilt van een gekend patroon vanaf regel 1, karakter 11.',rendered_data='<p>Je oplossing verschilt van een gekend patroon vanaf regel 1, karakter 11.</p>')])
+        expected = OutcomeAnalysis(outcome=False,outcomes_components=[OutcomeComponent(component_number=1,outcome=False,desired_outcome=True,rendered_data='<p>Je oplossing verschilt van een gekend patroon vanaf regel 1, karakter 11.</p>')])
         self.assertEquals(analysis,expected)
 
     def test_nonmatching_string_multiple_lines(self):
@@ -37,7 +37,7 @@ class RegexMatchingTest(TestCase):
         mock_open.return_value.__enter__.return_value.read.return_value = 'acdddddddde\nfgih'
         submission = SubmissionV2(content_uid='some_uid')
         analysis = chk.check_submission(submission=submission,student_path='/student',model_path='/home/model',desired_outcome=True,init_check_number=1,parent_is_negation=False,open=mock_open)
-        expected = OutcomeAnalysis(outcome=False,outcomes_components=[OutcomeComponent(component_number=1,outcome=False,desired_outcome=True,renderer='text',renderer_data='Je oplossing verschilt van een gekend patroon vanaf regel 2, karakter 3.',rendered_data='<p>Je oplossing verschilt van een gekend patroon vanaf regel 2, karakter 3.</p>')])
+        expected = OutcomeAnalysis(outcome=False,outcomes_components=[OutcomeComponent(component_number=1,outcome=False,desired_outcome=True,rendered_data='<p>Je oplossing verschilt van een gekend patroon vanaf regel 2, karakter 3.</p>')])
         self.assertEquals(analysis,expected)
 
 if __name__ == '__main__':
