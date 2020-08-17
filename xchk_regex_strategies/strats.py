@@ -28,9 +28,6 @@ class RegexCheck(CheckingPredicate):
     def entry(self,exercise_name):
         return f'{self.name or exercise_name}{"." if self.extension else ""}{self.extension or ""}'
 
-    def mentioned_files(self,exercise_name):
-        return set(self.entry(exercise_name))
-
     def instructions(self,exercise_name):
         return [f'De inhoud van je bestand met naam {self.entry(exercise_name)} matcht met {self.pattern_description}']
 
@@ -55,5 +52,23 @@ class RegexCheck(CheckingPredicate):
                     explanation = f"Je oplossing matcht volledig met {self.pattern_description} en dat is niet gewenst."
             else:
                 explanation = None
+            return OutcomeAnalysis(outcome=overall_outcome,
+                                   outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,rendered_data=f'<p>{explanation}</p>' if explanation else "",acceptable_to_ancestor=overall_outcome == desired_outcome or ancestor_has_alternatives)])
+
+class UnhelpfulRegexCheck(RegexCheck):
+    
+    def __init__(self,pattern,pattern_description='een gekend patroon',name=None,extension=None):
+        super().__init__(pattern,pattern_description='een gekend patroon',name=None,extension=None)
+
+    def check_submission(self,submission,student_path,desired_outcome,init_check_number,ancestor_has_alternatives,parent_is_negation=False,open=open):
+        with open(os.path.join(student_path,self.entry(submission.content_uid))) as fhs:
+            fhs_contents = fhs.read()
+            overall_outcome = self.pattern.fullmatch(fhs_contents)
+            explanation = None
+            if overall_outcome != desired_outcome:
+                if not overall_outcome:
+                    explanation = f'Je oplossing is geen volledige match met {self.pattern_description}.'
+                else:
+                    explanation = f'Je oplossing is een volledige match met {self.pattern_description}.'
             return OutcomeAnalysis(outcome=overall_outcome,
                                    outcomes_components=[OutcomeComponent(component_number=init_check_number,outcome=overall_outcome,desired_outcome=desired_outcome,rendered_data=f'<p>{explanation}</p>' if explanation else "",acceptable_to_ancestor=overall_outcome == desired_outcome or ancestor_has_alternatives)])
